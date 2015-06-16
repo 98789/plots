@@ -3,7 +3,7 @@ import matplotlib.cm as cm
 import argparse as ap
 from numpy import linspace
 
-def plot_string(text):
+def plot_string(text, do_multi=False):
     """plot data stored as text"""
 
     sensors = text.split(';')
@@ -14,7 +14,8 @@ def plot_string(text):
     colors = iter(cm.rainbow(linspace(0, 1, len(data_t))))
 
     for n,y in enumerate(data_t):
-        sb_plt = fig.add_subplot(len(data_t),1,n+1)
+        if do_multi:
+            sb_plt = fig.add_subplot(len(data_t),1,n+1)
         plt.scatter(range(len(y)), y, color = next(colors))
 #        plt.axis([0, len(y), 0, max(int(n) for n in y)])
 
