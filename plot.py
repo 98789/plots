@@ -16,16 +16,19 @@ def plot_string(text, do_multi=False):
     for n,y in enumerate(data_t):
         if do_multi:
             sb_plt = fig.add_subplot(len(data_t),1,n+1)
-        plt.scatter(range(len(y)), y, color = next(colors))
+        plt.plot(range(len(y)), y, color = next(colors))
 #        plt.axis([0, len(y), 0, max(int(n) for n in y)])
 
     plt.savefig("dino.png")
 
 if __name__ == "__main__":
     parser = ap.ArgumentParser(description='Process some integers.')
-    parser.add_argument('text', metavar='S', type=str, nargs='?',
-                   help='a string to be sketched')
+    parser.add_argument('file', metavar='F', type=str, nargs='?',
+                   help='file to read')
 
     args = parser.parse_args()
 
-    plot_string(args.text)
+    f = open(args.file)
+    text = f.readline()
+
+    plot_string(text, True)
